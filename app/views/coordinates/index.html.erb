@@ -1,0 +1,21 @@
+Enter Longitude and Latitude, separate by commas and newLines
+<br/><br/>
+Ex.)<br/>
+<i>
+47.656099,-122.366587<br/>
+47.660080,-122.376292<br/>
+47.664707,-122.396150<br/>
+47.669564,-122.407149<br/>
+47.683022,-122.414777<br/>
+</i>
+<br/><br/>
+
+<%= form_for (@coords) do |f| %>
+  <div class="field">
+    <%= f.label :coordinates %><br/>
+    <%= f.text_area :coordinates, :size =>'50x10'%>
+  </div>
+  <div class="actions">
+    <%= f.submit "Generate Map" %>
+  </div>
+<% end %>

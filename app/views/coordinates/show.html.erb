@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<title>Google Maps JavaScript API v3 Example: Polygon Simple</title>
+<link href="https://developers.google.com/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+
+  function initialize() {
+    var myOptions = {
+      mapTypeId: google.maps.MapTypeId.TERRAIN
+    };
+
+    var polyGon;
+
+    var map = new google.maps.Map(document.getElementById("map_canvas"),
+        myOptions);
+
+    var triangleCoords = [
+      <% @coords.parse_coords.each do |f| %>
+         new google.maps.LatLng(<%= f[0] %>, <%= f[1] %>),
+      <% end %>
+    ];
+
+    var latlngbounds = new google.maps.LatLngBounds();
+            for ( var i = 0; i < triangleCoords .length; i++ ){
+              latlngbounds.extend( triangleCoords [ i ] );
+            }
+    map.fitBounds(latlngbounds);
+
+    // Construct the polygon
+    polyGon = new google.maps.Polygon({
+      paths: triangleCoords,
+      strokeColor: "#FF0000",
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: "#FF0000",
+      fillOpacity: 0.35
+    });
+
+   polyGon.setMap(map);
+  }
+</script>
+</head>
+
+<body onload="initialize()">
+  <div id="map_canvas"></div>
+</body>
+</html>
+
